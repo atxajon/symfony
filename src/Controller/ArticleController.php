@@ -10,11 +10,11 @@ use Symfony\Component\Routing\Annotation\Route;
 class ArticleController extends AbstractController {
 
   /**
-   * @Route("/")
+   * @Route("/", name="app_homepage")
    * @return Response
    */
   public function homepage() {
-    return new Response('Some content to show on the front page');
+    return $this->render('article/homepage.html.twig');
   }
 
   /**
@@ -26,9 +26,9 @@ class ArticleController extends AbstractController {
   }
 
   /**
-   * @Route("/blog/{id}")
+   * @Route("/blog/{article_slug}", name="article_show")
    */
-  public function blogPages($id) {
+  public function blogPages($article_slug) {
     $comments = [
       'I ate a normal rock once. It did NOT taste like bacon!',
       'Woohoo! I\'m going on an all-asteroid diet!',
@@ -36,7 +36,7 @@ class ArticleController extends AbstractController {
     ];
     return $this->render('article/show.html.twig', [
       'title' => 'Blog page',
-      'page_id' => ucwords($id),
+      'article_slug' => $article_slug,
       'comments' => $comments,
     ]);
   }
