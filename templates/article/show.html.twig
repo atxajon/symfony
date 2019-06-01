@@ -1,13 +1,63 @@
 {% extends 'base.html.twig' %}
-{% block title %}
-  {{ title }}
+{% block title %}Read: {{ title }}{% endblock %}
+{% block body %}
+  <h3>The id of this page is: {{ page_id }}</h3>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="show-article-container p-3 mt-4">
+          cow est ribeye adipisicing. Pig hamburger pork belly enim. Do porchetta minim capicola irure pancetta chuck
+          fugiat.</p>
+          <p>Sausage tenderloin officia jerky nostrud. Laborum elit pastrami non, pig kevin buffalo minim ex quis. Pork belly
+            pork chop officia anim. Irure tempor leberkas kevin adipisicing cupidatat qui buffalo ham aliqua pork belly
+            exercitation eiusmod. Exercitation incididunt rump laborum, t-bone short ribs buffalo ut shankle pork chop
+            bresaola shoulder burgdoggen fugiat. Adipisicing nostrud chicken consequat beef ribs, quis filet mignon do.
+            Prosciutto capicola mollit shankle aliquip do dolore hamburger brisket turducken eu.</p>
+          <p>Do mollit deserunt prosciutto laborum. Duis sint tongue quis nisi. Capicola qui beef ribs dolore pariatur.
+            Minim strip steak fugiat nisi est, meatloaf pig aute. Swine rump turducken nulla sausage. Reprehenderit pork
+            belly tongue alcatra, shoulder excepteur in beef bresaola duis ham bacon eiusmod. Doner drumstick short loin,
+            adipisicing cow cillum tenderloin.</p>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <p class="share-icons mb-5"><span class="pr-1">Share:</span> <i class="pr-1 fa fa-facebook-square"></i><i class="pr-1 fa fa-twitter-square"></i><i class="pr-1 fa fa-reddit-square"></i><i class="pr-1 fa fa-share-alt-square"></i></p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <h3><i class="pr-3 fa fa-comment"></i>{{ comments|length }} Comments</h3>
+        <hr>
+        <div class="row mb-5">
+          <div class="col-sm-12">
+            <img class="comment-img rounded-circle" src="{{ asset('images/astronaut-profile.png') }}">
+            <div class="comment-container d-inline-block pl-3 align-top">
+              <span class="commenter-name">Amy Oort</span>
+              <div class="form-group">
+                <textarea class="form-control comment-form" id="articleText" rows="1"></textarea>
+              </div>
+              <button type="submit" class="btn btn-info">Comment</button>
+            </div>
+          </div>
+        </div>
+        {% for comment in comments %}
+          <div class="row">
+            <div class="col-sm-12">
+              <img class="comment-img rounded-circle" src="{{ asset('/images/alien-profile.png') }}">
+              <div class="comment-container d-inline-block pl-3 align-top">
+                <span class="commenter-name">Mike Ferengi</span>
+                <br>
+                <span class="comment"> {{ comment }}</span>
+                <p><a href="#">Reply</a></p>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  </div>
+  </div>
+  </div>
 {% endblock %}
-  {% block body %}
-    <h1>Id of this page is: {{ page_id }}</h1>
-    <h3>Comments</h3>
-    <ul>
-      {% for comment in comments %}
-        <li>{{ comment }}</li>
-      {% endfor %}
-    </ul>
-  {% endblock %}
