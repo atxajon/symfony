@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+  {{ title }}
+{% endblock %}
+  {% block body %}
+    <h1>Id of this page is: {{ page_id }}</h1>
+    <h3>Comments</h3>
+    <ul>
+      {% for comment in comments %}
+        <li>{{ comment }}</li>
+      {% endfor %}
+    </ul>
+  {% endblock %}
