@@ -4,6 +4,7 @@ namespace App\Controller;
 
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -39,5 +40,17 @@ class ArticleController extends AbstractController {
       'article_slug' => $article_slug,
       'comments' => $comments,
     ]);
+  }
+
+  /**
+   * @Route("/blog/{article_slug}/heart", name="article_toggle_heart", methods={"POST"})
+   * @param $article_slug
+   *
+   * @return JsonResponse
+   */
+  public function toggleArticleHeart($article_slug) {
+    // @todo: we dont have a db yet, when we do we need to heart/unheart.
+    return new JsonResponse(['hearts' => rand(5, 100)]);
+
   }
 }
