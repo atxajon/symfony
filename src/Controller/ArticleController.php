@@ -3,10 +3,9 @@
 namespace App\Controller;
 
 
-use Michelf\MarkdownInterface;
+use App\Service\MarkdownHelper;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Cache\Adapter\AdapterInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -32,7 +31,7 @@ class ArticleController extends AbstractController {
   /**
    * @Route("/blog/{article_slug}", name="article_show")
    */
-  public function blogPages($article_slug, MarkdownInterface $markdown, AdapterInterface $cache) {
+  public function blogPages($article_slug, MarkdownHelper $markdownHelper) {
     $comments = [
       'I ate a normal rock once. It did NOT taste like bacon!',
       'Woohoo! I\'m going on an all-asteroid diet!',
@@ -58,16 +57,7 @@ cow est ribeye adipisicing. Pig hamburger pork belly enim. Do porchetta minim ca
 fugiat.
 EOF;
 
-    $item = $cache->getItem('markdown_'.md5($articleContent));
-    // If it's not in cache
-    if (!$item->isHit()) {
-      // Create it.
-      $item->set($markdown->transform($articleContent));
-      $cache->save($item);
-    }
-    $articleContent = $item->get();
-
-    dump($markdown);die;
+    $articleContent = $markdownHelper->parse($articleContent);
 
     return $this->render('article/show.html.twig', [
       'title' => 'Blog page',
